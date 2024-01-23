@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { getCharactersResponse } from '../../api/api';
-import Character from '../../interfaces/Character';
+import ICharacter from '../../interfaces/Character';
 import CharacterTable from '../../components/CharacterTable/CharacterTable';
+import Search from '../../components/Search/Search';
+import Filter from '../../components/Filter/Filter';
 
 const HomePage: React.FC = () => {
-  const [characters, setCharacters] = useState<Character[] | []>([]);
+  const [characters, setCharacters] = useState<ICharacter[] | []>([]);
 
   useEffect(() => {
     loadCharacters();
@@ -18,8 +20,15 @@ const HomePage: React.FC = () => {
       console.error('Error loading characters:', error);
     }
   };
+  //Map filters from config 
   return (
-    <CharacterTable characters={characters} key={'CharacterTableHome'} />
+    <>
+      <Search />
+
+      <Filter defaultLabel={'bla'} labels={['1', '2', '3', '4', '5', '6']} />
+      <Filter defaultLabel={'bla'} labels={['1', '2', '3', '4', '5', '6']} />
+      <CharacterTable characters={characters} key={'CharacterTableHome'} />
+    </>
   );
 };
 
