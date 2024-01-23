@@ -7,11 +7,11 @@ import {
     TableRow,
     Paper,
 } from '@mui/material';
-import CharacterTableProps from '../../interfaces/CharacterTableProps';
+import ICharacterTableProps from '../../interfaces/CharacterTableProps';
 
 //TODO: Create config file with hard coded titles
 
-const CharacterTable: React.FC<CharacterTableProps> = ({ characters }) => {
+const CharacterTable: React.FC<ICharacterTableProps> = ({ characters }) => {
     return (
         <>
             <TableContainer component={Paper} style={{ maxHeight: '400px', overflowY: 'auto' }}>

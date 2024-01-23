@@ -1,5 +1,5 @@
 import Character from "./Character";
 
-export default interface CharacterTableProps {
+export default interface ICharacterTableProps {
     characters: Character[];
 }

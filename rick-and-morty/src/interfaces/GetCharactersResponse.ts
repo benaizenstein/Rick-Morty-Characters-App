@@ -7,7 +7,7 @@ interface Info {
     prev: string;
 }
 
-export default interface GetCharactersResponse {
+export default interface IGetCharactersResponse {
     results: Character[];
     info: Info;
 }

@@ -8,7 +8,7 @@ interface Location {
     url: string;
 }
 
-export default interface Character {
+export default interface ICharacter {
     id: number;
     name: string;
     status: 'Alive' | 'Dead' | 'unknown';
