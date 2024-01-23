@@ -7,3 +7,5 @@
 7.clear button
 8.TS overview
 9.000webhost
+10.debounce
+11.init data (20)
