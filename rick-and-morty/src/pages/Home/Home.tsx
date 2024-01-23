@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import { Character } from '../../interfaces/Character';
-import { getCharacters } from '../../api/api';
+import { getCharactersResponse } from '../../api/api';
+import Character from '../../interfaces/Character';
+import CharacterTable from '../../components/CharacterTable/CharacterTable';
 
 const HomePage: React.FC = () => {
-  const [characters, setCharacters] = useState<Character[]>([]);
+  const [characters, setCharacters] = useState<Character[] | []>([]);
 
   useEffect(() => {
     loadCharacters();
@@ -11,14 +12,14 @@ const HomePage: React.FC = () => {
 
   const loadCharacters = async () => {
     try {
-      const charactersData = await getCharacters();
+      const charactersData = await getCharactersResponse();
       setCharacters(charactersData.results)
     } catch (error) {
       console.error('Error loading characters:', error);
     }
   };
   return (
-    <p>Home Page</p>
+    <CharacterTable characters={characters} key={'CharacterTableHome'} />
   );
 };
 

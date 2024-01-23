@@ -8,14 +8,7 @@ interface Location {
     url: string;
 }
 
-interface Info {
-    count: number;
-    next: string;
-    pages: number
-    prev: string
-}
-
-export interface Character {
+export default interface Character {
     id: number;
     name: string;
     status: 'Alive' | 'Dead' | 'unknown';
@@ -29,10 +22,3 @@ export interface Character {
     url: string;
     created: string;
 }
-
-
-export interface GetCharactersResponse {
-    results: Character[];
-    info: Info
-}
-
