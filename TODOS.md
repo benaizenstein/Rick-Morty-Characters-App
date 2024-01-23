@@ -1,6 +1,6 @@
 1.handle pagination
 2.handle search and filter
-3.handle dialog
+3.handle dialog - Appearance data
 4.create config file
 5.style and layout
 6.bonus?

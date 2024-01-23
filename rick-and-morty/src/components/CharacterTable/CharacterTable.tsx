@@ -8,10 +8,24 @@ import {
     Paper,
 } from '@mui/material';
 import ICharacterTableProps from '../../interfaces/CharacterTableProps';
+import CharacterDetailsDialog from '../CharacterDetailsDialog/CharacterDetailsDialog';
+import ICharacter from '../../interfaces/Character';
+import { useState } from 'react';
+import React from 'react';
 
 //TODO: Create config file with hard coded titles
 
 const CharacterTable: React.FC<ICharacterTableProps> = ({ characters }) => {
+    const [selectedCharacter, setSelectedCharacter] = useState<ICharacter | null>(null);
+
+    const handleRowClick = (character: ICharacter) => {
+        setSelectedCharacter(character);
+    };
+
+    const handleCloseDialog = () => {
+        setSelectedCharacter(null);
+    };
+
     return (
         <>
             <TableContainer component={Paper} style={{ maxHeight: '400px', overflowY: 'auto' }}>
@@ -28,7 +42,9 @@ const CharacterTable: React.FC<ICharacterTableProps> = ({ characters }) => {
                     </TableHead>
                     <TableBody>
                         {characters.map((character) => (
-                            <TableRow key={character.id}>
+                            <TableRow key={character.id}
+                                onClick={() => handleRowClick(character)}
+                                style={{ cursor: 'pointer' }}>
                                 <TableCell>
                                     <img
                                         src={character.image}
@@ -46,7 +62,7 @@ const CharacterTable: React.FC<ICharacterTableProps> = ({ characters }) => {
                     </TableBody>
                 </Table>
             </TableContainer>
-
+            <CharacterDetailsDialog character={selectedCharacter} onClose={handleCloseDialog} />
         </>
     );
 };
