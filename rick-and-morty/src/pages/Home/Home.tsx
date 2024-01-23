@@ -32,6 +32,11 @@ const HomePage: React.FC = () => {
   const handleFilterChange = (value: string) => {
     setFilterValue(value);
   };
+
+  const handlePageChange = (page: number) => {
+    setCurrentPage(page);
+  };
+
   //Map filters from config 
 
   return (
@@ -39,7 +44,7 @@ const HomePage: React.FC = () => {
       <Search onSearchChange={handleSearchChange} />
       <Filter onFilterChange={handleFilterChange} defaultLabel={'bla'} labels={['1', '2', '3', '4', '5', '6']} />
       <CharacterTable characters={characters} key={'CharacterTableHome'} />
-      <CustomPagination currentPage={1} totalPageCount={10} />
+      <CustomPagination currentPage={currentPage} totalPageCount={10} onPageChange={handlePageChange} />
     </>
   );
 };

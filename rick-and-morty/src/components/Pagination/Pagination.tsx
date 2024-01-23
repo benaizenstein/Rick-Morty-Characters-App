@@ -4,9 +4,9 @@ import React from 'react';
 
 
 
-const CustomPagination: React.FC<ICustomPagination> = ({ currentPage, totalPageCount }) => {
-    const handleChange = () => {
-        //handle pagination 
+const CustomPagination: React.FC<ICustomPagination> = ({ currentPage, totalPageCount, onPageChange }) => {
+    const handleChange = (event: React.ChangeEvent<unknown>, value: number) => {
+        onPageChange(value);
     };
 
     return (
