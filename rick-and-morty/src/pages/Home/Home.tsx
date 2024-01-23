@@ -4,6 +4,7 @@ import ICharacter from '../../interfaces/Character';
 import CharacterTable from '../../components/CharacterTable/CharacterTable';
 import Search from '../../components/Search/Search';
 import Filter from '../../components/Filter/Filter';
+import CustomPagination from '../../components/Pagination/Pagination';
 
 const HomePage: React.FC = () => {
   const [characters, setCharacters] = useState<ICharacter[] | []>([]);
@@ -21,13 +22,14 @@ const HomePage: React.FC = () => {
     }
   };
   //Map filters from config 
+
   return (
     <>
       <Search />
-
       <Filter defaultLabel={'bla'} labels={['1', '2', '3', '4', '5', '6']} />
       <Filter defaultLabel={'bla'} labels={['1', '2', '3', '4', '5', '6']} />
       <CharacterTable characters={characters} key={'CharacterTableHome'} />
+      <CustomPagination currentPage={1} totalPageCount={10} />
     </>
   );
 };
