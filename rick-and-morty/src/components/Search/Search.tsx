@@ -1,15 +1,18 @@
 
 import { useState } from 'react';
-import { TextField, } from '@mui/material';
+import { TextField } from '@mui/material';
+import ISearch from '../../interfaces/Search';
 
 
 
 
-const Search: React.FC = () => {
+const Search: React.FC<ISearch> = ({ onSearchChange }) => {
     const [searchQuery, setSearchQuery] = useState<string>('');
 
     const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
-        setSearchQuery(event.target.value);
+        const value = event.target.value;
+        setSearchQuery(value);
+        onSearchChange(value);
     };
 
     return (

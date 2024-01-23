@@ -2,11 +2,13 @@ import { useState } from 'react';
 import { Select, MenuItem, InputLabel, FormControl, SelectChangeEvent } from '@mui/material';
 import IFilter from '../../interfaces/Filter';
 
-const Filter: React.FC<IFilter> = ({ defaultLabel, labels }) => {
+const Filter: React.FC<IFilter> = ({ defaultLabel, labels, onFilterChange }) => {
     const [filterQuery, setFilterQuery] = useState<string>('');
 
-    const handleSearch = (event: SelectChangeEvent<string>) => {
-        setFilterQuery(event.target.value);
+    const handleFilterChange = (event: SelectChangeEvent<string>) => {
+        const value = event.target.value;
+        setFilterQuery(value);
+        onFilterChange(value);
     };
 
     return (
@@ -17,7 +19,7 @@ const Filter: React.FC<IFilter> = ({ defaultLabel, labels }) => {
                 id={defaultLabel}
                 value={filterQuery}
                 label={defaultLabel}
-                onChange={handleSearch}
+                onChange={handleFilterChange}
             >
                 <MenuItem value="" disabled>
                     Select {defaultLabel}
