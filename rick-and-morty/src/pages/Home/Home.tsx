@@ -8,7 +8,8 @@ import CustomPagination from '../../components/Pagination/Pagination';
 
 const HomePage: React.FC = () => {
   const [characters, setCharacters] = useState<ICharacter[] | []>([]);
-  const [currentPage, setCurrentPage] = useState<number>(0);
+  const [currentPage, setCurrentPage] = useState<number>(1);
+  const [totalPages, setTotalPages] = useState<number>(0);
   const [searchValue, setSearchValue] = useState<string>('');
   const [filterValue, setFilterValue] = useState<string>('');
 
@@ -18,7 +19,8 @@ const HomePage: React.FC = () => {
 
   const loadCharacters = async () => {
     try {
-      const charactersData = await getCharactersResponse();
+      const charactersData = await getCharactersResponse(currentPage, searchValue, filterValue);
+      setTotalPages(charactersData.info.pages)
       setCharacters(charactersData.results)
     } catch (error) {
       console.error('Error loading characters:', error);
@@ -27,10 +29,12 @@ const HomePage: React.FC = () => {
 
   const handleSearchChange = (value: string) => {
     setSearchValue(value);
+    setCurrentPage(1)
   };
 
   const handleFilterChange = (value: string) => {
     setFilterValue(value);
+    setCurrentPage(1)
   };
 
   const handlePageChange = (page: number) => {
@@ -44,7 +48,7 @@ const HomePage: React.FC = () => {
       <Search onSearchChange={handleSearchChange} />
       <Filter onFilterChange={handleFilterChange} defaultLabel={'bla'} labels={['1', '2', '3', '4', '5', '6']} />
       <CharacterTable characters={characters} key={'CharacterTableHome'} />
-      <CustomPagination currentPage={currentPage} totalPageCount={10} onPageChange={handlePageChange} />
+      <CustomPagination currentPage={currentPage} totalPageCount={totalPages} onPageChange={handlePageChange} />
     </>
   );
 };
