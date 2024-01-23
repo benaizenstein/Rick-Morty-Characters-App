@@ -5,6 +5,7 @@ import CharacterTable from '../../components/CharacterTable/CharacterTable';
 import Search from '../../components/Search/Search';
 import Filter from '../../components/Filter/Filter';
 import CustomPagination from '../../components/Pagination/Pagination';
+import Button from '@mui/material/Button';
 
 const HomePage: React.FC = () => {
   const [characters, setCharacters] = useState<ICharacter[] | []>([]);
@@ -41,12 +42,21 @@ const HomePage: React.FC = () => {
     setCurrentPage(page);
   };
 
+  const handleClear = () => {
+    setSearchValue('');
+    setFilterValue('');
+    setCurrentPage(1);
+  };
+
   //Map filters from config 
 
   return (
     <>
       <Search onSearchChange={handleSearchChange} />
       <Filter onFilterChange={handleFilterChange} defaultLabel={'bla'} labels={['1', '2', '3', '4', '5', '6']} />
+      <Button variant="outlined" color="primary" onClick={handleClear}>
+        Clear
+      </Button>
       <CharacterTable characters={characters} key={'CharacterTableHome'} />
       <CustomPagination currentPage={currentPage} totalPageCount={totalPages} onPageChange={handlePageChange} />
     </>
