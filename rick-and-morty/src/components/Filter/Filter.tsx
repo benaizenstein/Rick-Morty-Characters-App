@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Select, MenuItem, InputLabel, FormControl, SelectChangeEvent } from '@mui/material';
 import IFilter from '../../interfaces/Filter';
+import { metadata } from '../../config/metadata';
 
 const Filter: React.FC<IFilter> = ({ label, options, type, onFilterChange }) => {
     const [filterQuery, setFilterQuery] = useState<string>('');
@@ -22,7 +23,7 @@ const Filter: React.FC<IFilter> = ({ label, options, type, onFilterChange }) => 
                 onChange={handleFilterChange}
             >
                 <MenuItem value="" disabled>
-                    Select {label}
+                    {metadata.searchTxt} {label}
                 </MenuItem>
                 {options.map((option) => (
                     <MenuItem value={option} key={option}>

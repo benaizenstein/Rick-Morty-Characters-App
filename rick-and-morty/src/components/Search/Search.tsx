@@ -1,9 +1,7 @@
-
 import { useState } from 'react';
 import { TextField } from '@mui/material';
 import ISearch from '../../interfaces/Search';
-
-
+import { metadata } from '../../config/metadata';
 
 
 const Search: React.FC<ISearch> = ({ onSearchChange }) => {
@@ -17,7 +15,7 @@ const Search: React.FC<ISearch> = ({ onSearchChange }) => {
 
     return (
         <div>
-            <TextField label="Search by name" variant="outlined" value={searchQuery} onChange={handleSearch} />
+            <TextField label={metadata.searchTxt} variant="outlined" value={searchQuery} onChange={handleSearch} />
         </div>
     );
 };

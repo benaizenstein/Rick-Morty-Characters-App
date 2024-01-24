@@ -69,7 +69,7 @@ const HomePage: React.FC = () => {
       }
 
       <Button variant="outlined" color="primary" onClick={handleClear}>
-        Clear
+        {metadata.clearTxt}
       </Button>
       <CharacterTable characters={characters} key={'CharacterTableHome'} />
       <CustomPagination currentPage={currentPage} totalPageCount={totalPages} onPageChange={handlePageChange} />

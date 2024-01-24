@@ -12,8 +12,8 @@ import CharacterDetailsDialog from '../CharacterDetailsDialog/CharacterDetailsDi
 import ICharacter from '../../interfaces/Character';
 import { useState } from 'react';
 import React from 'react';
+import { metadata } from '../../config/metadata';
 
-//TODO: Create config file with hard coded titles
 
 const CharacterTable: React.FC<ICharacterTableProps> = ({ characters }) => {
     const [selectedCharacter, setSelectedCharacter] = useState<ICharacter | null>(null);
@@ -32,12 +32,7 @@ const CharacterTable: React.FC<ICharacterTableProps> = ({ characters }) => {
                 <Table>
                     <TableHead>
                         <TableRow>
-                            <TableCell>Image</TableCell>
-                            <TableCell>Character Name</TableCell>
-                            <TableCell>Origin</TableCell>
-                            <TableCell>Status</TableCell>
-                            <TableCell>Species</TableCell>
-                            <TableCell>Gender</TableCell>
+                            {metadata.tableHeaders.map(header => <TableCell>{header}</TableCell>)}
                         </TableRow>
                     </TableHead>
                     <TableBody>

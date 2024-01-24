@@ -6,5 +6,11 @@ export const metadata = {
     defaultFilter: {
         gender: '',
         status: '',
-    }
+    },
+    searchTxt: "Search",
+    clearTxt: "Clear",
+    tableHeaders: ['Image', 'Character Name', 'Origin', 'Status', 'Species', 'Gender'],
+    selectText: "Select"
+
+
 }
