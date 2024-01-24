@@ -32,7 +32,7 @@ const CharacterTable: React.FC<ICharacterTableProps> = ({ characters }) => {
                 <Table>
                     <TableHead>
                         <TableRow>
-                            {metadata.tableHeaders.map(header => <TableCell>{header}</TableCell>)}
+                            {metadata.tableHeaders.map((header, i) => <TableCell key={i}>{header}</TableCell>)}
                         </TableRow>
                     </TableHead>
                     <TableBody>
