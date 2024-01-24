@@ -2,31 +2,31 @@ import { useState } from 'react';
 import { Select, MenuItem, InputLabel, FormControl, SelectChangeEvent } from '@mui/material';
 import IFilter from '../../interfaces/Filter';
 
-const Filter: React.FC<IFilter> = ({ defaultLabel, labels, onFilterChange }) => {
+const Filter: React.FC<IFilter> = ({ label, options, type, onFilterChange }) => {
     const [filterQuery, setFilterQuery] = useState<string>('');
 
     const handleFilterChange = (event: SelectChangeEvent<string>) => {
         const value = event.target.value;
         setFilterQuery(value);
-        onFilterChange(value);
+        onFilterChange(type, value);
     };
 
     return (
         <FormControl variant="outlined" style={{ marginLeft: '16px' }}>
-            <InputLabel id="status-select-label">{defaultLabel}</InputLabel>
+            <InputLabel id="status-select-label">{label}</InputLabel>
             <Select
                 labelId="status-select-label"
-                id={defaultLabel}
+                id={label}
                 value={filterQuery}
-                label={defaultLabel}
+                label={label}
                 onChange={handleFilterChange}
             >
                 <MenuItem value="" disabled>
-                    Select {defaultLabel}
+                    Select {label}
                 </MenuItem>
-                {labels.map((label) => (
-                    <MenuItem value={label} key={label}>
-                        {label}
+                {options.map((option) => (
+                    <MenuItem value={option} key={option}>
+                        {option}
                     </MenuItem>
                 ))}
             </Select>

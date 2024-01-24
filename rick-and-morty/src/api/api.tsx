@@ -3,14 +3,14 @@ import IGetCharactersResponse from '../interfaces/GetCharactersResponse';
 
 const API_BASE_URL = 'https://rickandmortyapi.com/api';
 
-export const getCharactersResponse = async (page: number = 1, searchQuery: string = "", filterValue: string = ""): Promise<IGetCharactersResponse> => {
-    console.log(page, searchQuery, filterValue)
+export const getCharactersResponse = async (page: number = 1, searchQuery: string = "", filtersValue: Object = {}): Promise<IGetCharactersResponse> => {
+    console.log(page, searchQuery, filtersValue)
     try {
         const response = await axios.get(`${API_BASE_URL}/character`, {
             params: {
                 page,
                 name: searchQuery,
-                status: filterValue,
+                ...filtersValue
             },
         });
         return response.data;

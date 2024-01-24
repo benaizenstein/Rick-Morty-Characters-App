@@ -1,5 +1,6 @@
 export default interface IFilter {
-    defaultLabel: string,
-    labels: string[],
-    onFilterChange: (value: string) => void;
+    label: string;
+    options: string[];
+    type: string,
+    onFilterChange: (type: string, value: string) => void;
 }

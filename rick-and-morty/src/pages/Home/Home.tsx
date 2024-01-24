@@ -6,21 +6,24 @@ import Search from '../../components/Search/Search';
 import Filter from '../../components/Filter/Filter';
 import CustomPagination from '../../components/Pagination/Pagination';
 import Button from '@mui/material/Button';
+import { metadata } from '../../config/metadata';
+
+
 
 const HomePage: React.FC = () => {
   const [characters, setCharacters] = useState<ICharacter[] | []>([]);
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [totalPages, setTotalPages] = useState<number>(0);
   const [searchValue, setSearchValue] = useState<string>('');
-  const [filterValue, setFilterValue] = useState<string>('');
+  const [filtersValue, setFiltersValue] = useState<{ gender: string; status: string; }>(metadata.defaultFilter);
 
   useEffect(() => {
     loadCharacters();
-  }, [currentPage, searchValue, filterValue]);
+  }, [currentPage, searchValue, filtersValue]);
 
   const loadCharacters = async () => {
     try {
-      const charactersData = await getCharactersResponse(currentPage, searchValue, filterValue);
+      const charactersData = await getCharactersResponse(currentPage, searchValue, filtersValue);
       setTotalPages(charactersData.info.pages)
       setCharacters(charactersData.results)
     } catch (error) {
@@ -33,8 +36,10 @@ const HomePage: React.FC = () => {
     setCurrentPage(1)
   };
 
-  const handleFilterChange = (value: string) => {
-    setFilterValue(value);
+  const handleFilterChange = (type: string, value: string) => {
+    let mutableFilters: { [key: string]: string } = { ...filtersValue };
+    mutableFilters[type] = value
+    setFiltersValue(mutableFilters as { gender: string; status: string });
     setCurrentPage(1)
   };
 
@@ -44,16 +49,25 @@ const HomePage: React.FC = () => {
 
   const handleClear = () => {
     setSearchValue('');
-    setFilterValue('');
+    setFiltersValue(metadata.defaultFilter);
     setCurrentPage(1);
   };
-
-  //Map filters from config 
 
   return (
     <>
       <Search onSearchChange={handleSearchChange} />
-      <Filter onFilterChange={handleFilterChange} defaultLabel={'bla'} labels={['1', '2', '3', '4', '5', '6']} />
+      {
+        metadata.filters.map(filter => (
+          <Filter
+            key={filter.type}
+            onFilterChange={handleFilterChange}
+            type={filter.type}
+            label={filter.label}
+            options={filter.options}
+          />
+        ))
+      }
+
       <Button variant="outlined" color="primary" onClick={handleClear}>
         Clear
       </Button>
