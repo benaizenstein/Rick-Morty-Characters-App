@@ -1,16 +1,39 @@
 import { Dialog, DialogTitle, DialogContent, DialogActions, Button } from '@mui/material';
 import ICharacterDetailsDialogProps from '../../interfaces/CharacterDetailsDialogProps';
-import React from 'react';
-
+import React, { useEffect, useState } from 'react';
+import { getCharacterFirstLastAppearance } from '../../api/api';
+import ICharacterAppearanceDetails from '../../interfaces/CharacterAppearanceDetails';
+import { metadata } from '../../config/metadata';
 const CharacterDetailsDialog: React.FC<ICharacterDetailsDialogProps> = ({ character, onClose }) => {
 
+    const [characterDetails, setCharacterDetails] = useState<ICharacterAppearanceDetails | null>(null);
+
+    useEffect(() => {
+        const fetchCharacterDetails = async () => {
+            console.log(character)
+            if (character) {
+                try {
+                    const result = await getCharacterFirstLastAppearance(character.id);
+                    console.log(result)
+                    setCharacterDetails(result);
+                } catch (error) {
+                    console.error('Error fetching character details:', error);
+                }
+            }
+        };
+        fetchCharacterDetails();
+    }, [character]);
     return (
         <Dialog open={character !== null} onClose={onClose} maxWidth="sm" fullWidth>
             <DialogTitle>{character?.name}</DialogTitle>
             <DialogContent>
                 <img src={character?.image} alt={character?.name} style={{ width: '100%', height: 'auto' }} />
-                {/* <p>First Appearance: {character?.firstAppearance}</p> */}
-                {/* <p>Last Appearance: {character?.lastAppearance}</p> */}
+                {characterDetails && (
+                    <div>
+                        <p>{metadata.firstAppearance} : {characterDetails.firstAppearance}</p>
+                        <p>{metadata.lastAppearance} : {characterDetails.lastAppearance}</p>
+                    </div>
+                )}
             </DialogContent>
             <DialogActions>
                 <Button onClick={onClose} color="primary">

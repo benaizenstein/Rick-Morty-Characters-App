@@ -10,7 +10,9 @@ export const metadata = {
     searchTxt: "Search",
     clearTxt: "Clear",
     tableHeaders: ['Image', 'Character Name', 'Origin', 'Status', 'Species', 'Gender'],
-    selectText: "Select"
+    selectText: "Select",
+    firstAppearance: "First Appearance",
+    lastAppearance: "Last Appearance"
 
 
 }
