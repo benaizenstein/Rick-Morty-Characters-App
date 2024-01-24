@@ -13,7 +13,7 @@ const Filter: React.FC<IFilter> = ({ label, options, type, onFilterChange }) => 
     };
 
     return (
-        <FormControl variant="outlined" style={{ marginLeft: '16px' }}>
+        <FormControl variant="outlined" style={{ width: '10rem' }}>
             <InputLabel id="status-select-label">{label}</InputLabel>
             <Select
                 labelId="status-select-label"

@@ -28,7 +28,7 @@ const CharacterTable: React.FC<ICharacterTableProps> = ({ characters }) => {
 
     return (
         <>
-            <TableContainer component={Paper} style={{ maxHeight: '400px', overflowY: 'auto' }}>
+            <TableContainer component={Paper} style={{ maxHeight: '75vh', overflowY: 'auto' }}>
                 <Table>
                     <TableHead>
                         <TableRow>

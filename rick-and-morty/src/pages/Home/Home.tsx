@@ -8,8 +8,6 @@ import CustomPagination from '../../components/Pagination/Pagination';
 import Button from '@mui/material/Button';
 import { metadata } from '../../config/metadata';
 
-
-
 const HomePage: React.FC = () => {
   const [characters, setCharacters] = useState<ICharacter[] | []>([]);
   const [currentPage, setCurrentPage] = useState<number>(1);
@@ -54,26 +52,27 @@ const HomePage: React.FC = () => {
   };
 
   return (
-    <>
-      <Search onSearchChange={handleSearchChange} />
-      {
-        metadata.filters.map(filter => (
-          <Filter
-            key={filter.type}
-            onFilterChange={handleFilterChange}
-            type={filter.type}
-            label={filter.label}
-            options={filter.options}
-          />
-        ))
-      }
-
-      <Button variant="outlined" color="primary" onClick={handleClear}>
-        {metadata.clearTxt}
-      </Button>
+    <div className="container">
+      <div className="SearchRow" style={{ display: 'flex' }}>
+        <Search onSearchChange={handleSearchChange} />
+        {
+          metadata.filters.map(filter => (
+            <Filter
+              key={filter.type}
+              onFilterChange={handleFilterChange}
+              type={filter.type}
+              label={filter.label}
+              options={filter.options}
+            />
+          ))
+        }
+        <Button variant="outlined" color="primary" onClick={handleClear}>
+          {metadata.clearTxt}
+        </Button>
+      </div>
       <CharacterTable characters={characters} key={'CharacterTableHome'} />
       <CustomPagination currentPage={currentPage} totalPageCount={totalPages} onPageChange={handlePageChange} />
-    </>
+    </div>
   );
 };
 

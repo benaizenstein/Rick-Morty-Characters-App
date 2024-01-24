@@ -10,11 +10,9 @@ const CharacterDetailsDialog: React.FC<ICharacterDetailsDialogProps> = ({ charac
 
     useEffect(() => {
         const fetchCharacterDetails = async () => {
-            console.log(character)
             if (character) {
                 try {
                     const result = await getCharacterFirstLastAppearance(character.id);
-                    console.log(result)
                     setCharacterDetails(result);
                 } catch (error) {
                     console.error('Error fetching character details:', error);
